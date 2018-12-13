@@ -5,7 +5,6 @@
 ![](https://img.shields.io/github/forks/elnurxf/azericard-package.svg)
 ![](https://img.shields.io/github/stars/elnurxf/azericard-package.svg)
 ![](https://img.shields.io/github/license/elnurxf/azericard-package.svg)
-![](https://img.shields.io/github/license/elnurxf/azericard-package.svg)
 ![](https://img.shields.io/twitter/url/https/github.com/elnurxf/azericard-package.svg?style=social)
 
 Framework agnostic PHP package to proceed AzeriCard payments and reversal/clearance procedures.
