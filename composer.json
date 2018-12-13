@@ -1,0 +1,41 @@
+{
+    "name": "elnurxf/azericard",
+    "description": "AzeriCard payment gateway helper package",
+    "keywords": [
+        "azericard",
+        "payment",
+        "gateway"
+    ],
+    "homepage": "https://github.com/elnurxf/azericard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elnur Akhundov",
+            "email": "elnurxf@gmail.com",
+            "homepage": "http://elnur.akhundov.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.5.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "elnurxf\\AzeriCard\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "elnurxf\\AzeriCard\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
