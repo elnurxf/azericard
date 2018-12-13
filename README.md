@@ -18,7 +18,7 @@ Framework agnostic PHP package to proceed AzeriCard payments and reversal/cleara
 Via Composer
 
 ``` bash
-$ composer require elnurxf/azericard
+$ composer require elnurxf/azericard dev-master
 ```
 
 ## Usage
