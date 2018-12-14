@@ -1,6 +1,6 @@
 # AzeriCard Payment Package
 
-![](https://img.shields.io/github/downloads/elnurxf/azericard/total.svg)
+![](https://poser.pugx.org/elnurxf/azericard/downloads.svg)
 ![](https://img.shields.io/github/issues/elnurxf/azericard.svg)
 ![](https://img.shields.io/github/forks/elnurxf/azericard.svg)
 ![](https://img.shields.io/github/stars/elnurxf/azericard.svg)
