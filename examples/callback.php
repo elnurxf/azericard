@@ -13,7 +13,7 @@ use \elnurxf\AzeriCard\Exceptions\WrongHashException;
 
 try {
 
-    $azericard = new AzeriCard($config);
+    $azericard = new AzeriCard($config, $testMode = true);
     $azericard->setLogPath(__DIR__ . DIRECTORY_SEPARATOR . 'logs'); // Comment to disable logs
     $azericard->setCallBackParameters($_POST);
 

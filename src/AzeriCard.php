@@ -25,6 +25,9 @@ class AzeriCard
     private $config             = [];
     private $callbackParameters = [];
     private $logPath            = null;
+    private $testMode           = false;
+    private $prodURL            = 'https://mpi.3dsecure.az/cgi-bin/cgi_link';
+    private $testURL            = 'https://testmpi.3dsecure.az/cgi-bin/cgi_link';
 
     private $callbackRequiredParameters = [
         'TERMINAL',
@@ -76,7 +79,7 @@ class AzeriCard
         'KEY_FOR_SIGN',
     ];
 
-    public function __construct($config = [])
+    public function __construct($config = [], $testMode = false)
     {
         date_default_timezone_set(self::TIMEZONE);
 
@@ -84,7 +87,9 @@ class AzeriCard
             throw new NoConfigException;
         }
 
-        $this->config = $config;
+        $this->testMode      = $testMode;
+        $this->config        = $config;
+        $this->config['URL'] = $this->testMode ? $this->testURL : $this->prodURL;
     }
 
     public function setLogPath($path = null)
@@ -111,6 +116,7 @@ class AzeriCard
         }
 
         $form_params              = $this->config;
+        var_dump($this->config);
         $form_params['ORDER']     = str_pad($form_params['ORDER'], 6, '0', STR_PAD_LEFT);
         $form_params['OPER_TIME'] = gmdate("YmdHis");
         $form_params['NONCE']     = substr(md5(rand()), 0, 16);
@@ -120,7 +126,8 @@ class AzeriCard
         . strlen($form_params['ORDER']) . $form_params['ORDER']
         . strlen($form_params['DESC']) . $form_params['DESC']
         . strlen($form_params['MERCH_NAME']) . $form_params['MERCH_NAME']
-        . strlen($form_params['MERCH_URL']) . $form_params['MERCH_URL'] . '-'
+        . strlen($form_params['MERCH_URL']) . $form_params['MERCH_URL']
+        . ($this->testMode ? '-' : '')
         . strlen($form_params['TERMINAL']) . $form_params['TERMINAL']
         . strlen($form_params['EMAIL']) . $form_params['EMAIL']
         . strlen($form_params['TRTYPE']) . $form_params['TRTYPE']

@@ -22,7 +22,7 @@ $config = array_merge($config, $order);
 
 try {
 
-    $azericard = new AzeriCard($config);
+    $azericard = new AzeriCard($config, $testMode = true);
 
     try {
 
