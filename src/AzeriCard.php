@@ -116,7 +116,6 @@ class AzeriCard
         }
 
         $form_params              = $this->config;
-        var_dump($this->config);
         $form_params['ORDER']     = str_pad($form_params['ORDER'], 6, '0', STR_PAD_LEFT);
         $form_params['OPER_TIME'] = gmdate("YmdHis");
         $form_params['NONCE']     = substr(md5(rand()), 0, 16);
