@@ -2,13 +2,13 @@
 
 namespace elnurxf\AzeriCard;
 
-use \elnurxf\AzeriCard\Exceptions\EmptyRequiredParametersException;
-use \elnurxf\AzeriCard\Exceptions\FailedTransactionException;
-use \elnurxf\AzeriCard\Exceptions\LogException;
-use \elnurxf\AzeriCard\Exceptions\NoConfigException;
-use \elnurxf\AzeriCard\Exceptions\NoParametersException;
-use \elnurxf\AzeriCard\Exceptions\WrongHashException;
-use \GuzzleHttp\Client;
+use elnurxf\AzeriCard\Exceptions\EmptyRequiredParametersException;
+use elnurxf\AzeriCard\Exceptions\FailedTransactionException;
+use elnurxf\AzeriCard\Exceptions\LogException;
+use elnurxf\AzeriCard\Exceptions\NoConfigException;
+use elnurxf\AzeriCard\Exceptions\NoParametersException;
+use elnurxf\AzeriCard\Exceptions\WrongHashException;
+use GuzzleHttp\Client;
 
 /**
  * Class AzeriCard
