@@ -96,6 +96,6 @@ class FailedTransactionException extends \Exception
             $message = 'Unknown RC code: ' . $code;
         }
 
-        parent::__construct($message, $code);
+        parent::__construct($message);
     }
 }

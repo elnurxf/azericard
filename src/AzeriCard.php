@@ -14,8 +14,16 @@ use GuzzleHttp\Client;
  * Class AzeriCard
  *
  * The main class for payment processing and reversal
- *
  * @package elnurxf\AzeriCard
+ *
+ * NOTE:
+ *  Differences between Test and Production environment are:
+ *   1. Test mode: INT_REF
+ *   2. Production mode: INTREF
+ *   3. There is dash "-" after MERCH_URL in P_SIGN calculation in Production mode
+ *   4. This may be vary depends on merchant/terminal.
+ *      So better to contact: Azericard Technical Support tsupport@azericard.com
+ *
  */
 
 class AzeriCard
@@ -28,6 +36,7 @@ class AzeriCard
     private $testMode           = false;
     private $prodURL            = 'https://mpi.3dsecure.az/cgi-bin/cgi_link';
     private $testURL            = 'https://testmpi.3dsecure.az/cgi-bin/cgi_link';
+    private $irKey              = 'INTREF';
 
     private $callbackRequiredParameters = [
         'TERMINAL',
@@ -39,7 +48,6 @@ class AzeriCard
         'RC',
         'APPROVAL',
         'RRN',
-        'INTREF',
         'TIMESTAMP',
         'NONCE',
         'P_SIGN',
@@ -73,7 +81,6 @@ class AzeriCard
         'CURRENCY',
         'ORDER',
         'RRN',
-        'INT_REF',
         'TERMINAL',
         'TRTYPE',
         'KEY_FOR_SIGN',
@@ -88,8 +95,12 @@ class AzeriCard
         }
 
         $this->testMode      = $testMode;
+        $this->irKey         = $this->testMode ? 'INT_REF' : 'INTREF';
         $this->config        = $config;
         $this->config['URL'] = $this->testMode ? $this->testURL : $this->prodURL;
+
+        array_push($this->callbackRequiredParameters, $this->irKey);
+        array_push($this->reversalFormRequiredParameters, $this->irKey);
     }
 
     public function setLogPath($path = null)
@@ -126,7 +137,7 @@ class AzeriCard
         . strlen($form_params['DESC']) . $form_params['DESC']
         . strlen($form_params['MERCH_NAME']) . $form_params['MERCH_NAME']
         . strlen($form_params['MERCH_URL']) . $form_params['MERCH_URL']
-        . ($this->testMode ? '-' : '')
+        . ($this->testMode ? '' : '-')
         . strlen($form_params['TERMINAL']) . $form_params['TERMINAL']
         . strlen($form_params['EMAIL']) . $form_params['EMAIL']
         . strlen($form_params['TRTYPE']) . $form_params['TRTYPE']
@@ -178,7 +189,7 @@ class AzeriCard
         . strlen($form_params["AMOUNT"]) . $form_params["AMOUNT"]
         . strlen($form_params["CURRENCY"]) . $form_params["CURRENCY"]
         . strlen($form_params["RRN"]) . $form_params["RRN"]
-        . strlen($form_params["INT_REF"]) . $form_params["INT_REF"]
+        . strlen($form_params[$this->irKey]) . $form_params[$this->irKey]
         . strlen($form_params["TRTYPE"]) . $form_params["TRTYPE"]
         . strlen($form_params["TERMINAL"]) . $form_params["TERMINAL"]
         . strlen($form_params["TIMESTAMP"]) . $form_params["TIMESTAMP"]
@@ -191,7 +202,7 @@ class AzeriCard
         $html .= '<input name="CURRENCY" value="' . $form_params['CURRENCY'] . '" type="hidden">';
         $html .= '<input name="ORDER" value="' . $form_params['ORDER'] . '" type="hidden">';
         $html .= '<input name="RRN" value="' . $form_params['RRN'] . '" type="hidden">';
-        $html .= '<input name="INT_REF" value="' . $form_params['INT_REF'] . '" type="hidden">';
+        $html .= '<input name="' . $this->irKey . '" value="' . $form_params[$this->irKey] . '" type="hidden">';
         $html .= '<input name="TERMINAL" value="' . $form_params['TERMINAL'] . '" type="hidden">';
         $html .= '<input name="TRTYPE" value="' . $form_params['TRTYPE'] . '" type="hidden">';
         $html .= '<input name="TIMESTAMP" value="' . $form_params['OPER_TIME'] . '" type="hidden">';
@@ -230,7 +241,7 @@ class AzeriCard
         . strlen($parameters['RC']) . $parameters['RC']
         . strlen($parameters['APPROVAL']) . $parameters['APPROVAL']
         . strlen($parameters['RRN']) . $parameters['RRN']
-        . strlen($parameters['INTREF']) . $parameters['INTREF']
+        . strlen($parameters[$this->irKey]) . $parameters[$this->irKey]
         . strlen($parameters['TIMESTAMP']) . $parameters['TIMESTAMP']
         . strlen($parameters['NONCE']) . $parameters['NONCE'];
 
@@ -259,22 +270,22 @@ class AzeriCard
             throw new FailedTransactionException($parameters['RC']);
         }
 
-        $form_params              = [];
-        $form_params['AMOUNT']    = $parameters['AMOUNT'];
-        $form_params['CURRENCY']  = $parameters['CURRENCY'];
-        $form_params['ORDER']     = $parameters['ORDER'];
-        $form_params['RRN']       = $parameters['RRN'];
-        $form_params['INT_REF']   = $parameters['INT_REF'];
-        $form_params['TERMINAL']  = $parameters['TERMINAL'];
-        $form_params['TRTYPE']    = '21';
-        $form_params['TIMESTAMP'] = gmdate('YmdHis');
-        $form_params['NONCE']     = substr(md5(rand()), 0, 16);
+        $form_params               = [];
+        $form_params['AMOUNT']     = $parameters['AMOUNT'];
+        $form_params['CURRENCY']   = $parameters['CURRENCY'];
+        $form_params['ORDER']      = $parameters['ORDER'];
+        $form_params['RRN']        = $parameters['RRN'];
+        $form_params[$this->irKey] = $parameters[$this->irKey];
+        $form_params['TERMINAL']   = $parameters['TERMINAL'];
+        $form_params['TRTYPE']     = '21';
+        $form_params['TIMESTAMP']  = gmdate('YmdHis');
+        $form_params['NONCE']      = substr(md5(rand()), 0, 16);
 
         $to_sign = strlen($parameters['ORDER']) . $parameters['ORDER']
         . strlen($parameters['AMOUNT']) . $parameters['AMOUNT']
         . strlen($parameters['CURRENCY']) . $parameters['CURRENCY']
         . strlen($parameters['RRN']) . $parameters['RRN']
-        . strlen($parameters['INT_REF']) . $parameters['INT_REF']
+        . strlen($parameters[$this->irKey]) . $parameters[$this->irKey]
         . strlen($parameters['TRTYPE']) . $parameters['TRTYPE']
         . strlen($parameters['TERMINAL']) . $parameters['TERMINAL']
         . strlen($parameters['TIMESTAMP']) . $parameters['TIMESTAMP']

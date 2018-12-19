@@ -10,8 +10,8 @@ use elnurxf\AzeriCard\Exceptions\NoConfigException;
 $order = [
     'AMOUNT'       => '3.70',
     'CURRENCY'     => 'AZN',
-    'ORDER'        => '123456',
-    'DESC'         => 'Payment for order #123456',
+    'ORDER'        => '000001',
+    'DESC'         => 'Payment for order #000001',
     'TRTYPE'       => '1', // 0 = AUTH, 1 = AUTH + CHECKOUT
     'LANG'         => 'en', // Possible values: az, en, ru
     'BUTTON_LABEL' => 'Continue to checkout',
@@ -58,7 +58,7 @@ try {
 
         <div class="row justify-content-md-center">
             <div class="col-md-5">
-                <?=$htmlForm; ?>
+                <?=$htmlForm;?>
             </div>
         </div>
     </div>

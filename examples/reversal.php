@@ -10,9 +10,9 @@ use elnurxf\AzeriCard\Exceptions\NoConfigException;
 $order = [
     'AMOUNT'       => '3.70',
     'CURRENCY'     => 'AZN',
-    'ORDER'        => '123456',
-    'RRN'          => '123456',
-    'INT_REF'      => '123456',
+    'ORDER'        => '000001',
+    'RRN'          => '',
+    'INT_REF'      => '',
     'TRTYPE'       => '22', // 22 = REVERSAL, 24 = CLEARANCE
     'BUTTON_LABEL' => 'Refund 3.70 AZN - Reversal',
     'BUTTON_CLASS' => 'btn btn-primary btn-lg btn-block',
