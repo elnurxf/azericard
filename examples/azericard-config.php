@@ -8,5 +8,5 @@ $config = [
     'MERCH_GMT'    => '+4',
     'TERMINAL'     => '17200000',
     'BACKREF'      => 'https://example.com',
-    'KEY_FOR_SIGN' => '12345678901234567890123456789012',
+    'KEY_FOR_SIGN' => '00112233445566778899AABBCCDDEEFF',
 ];

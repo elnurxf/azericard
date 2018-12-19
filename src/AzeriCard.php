@@ -128,7 +128,7 @@ class AzeriCard
 
         $form_params              = $this->config;
         $form_params['ORDER']     = str_pad($form_params['ORDER'], 6, '0', STR_PAD_LEFT);
-        $form_params['OPER_TIME'] = gmdate("YmdHis");
+        $form_params['TIMESTAMP'] = gmdate("YmdHis");
         $form_params['NONCE']     = substr(md5(rand()), 0, 16);
 
         $to_sign = strlen($form_params['AMOUNT']) . $form_params['AMOUNT']
@@ -143,7 +143,7 @@ class AzeriCard
         . strlen($form_params['TRTYPE']) . $form_params['TRTYPE']
         . strlen($form_params['COUNTRY']) . $form_params['COUNTRY']
         . strlen($form_params['MERCH_GMT']) . $form_params['MERCH_GMT']
-        . strlen($form_params['OPER_TIME']) . $form_params['OPER_TIME']
+        . strlen($form_params['TIMESTAMP']) . $form_params['TIMESTAMP']
         . strlen($form_params['NONCE']) . $form_params['NONCE']
         . strlen($form_params['BACKREF']) . $form_params['BACKREF'];
 
@@ -163,7 +163,7 @@ class AzeriCard
         $html .= '<input name="COUNTRY" value="' . $form_params['COUNTRY'] . '" type="hidden">';
         $html .= '<input name="MERCH_GMT" value="' . $form_params['MERCH_GMT'] . '" type="hidden">';
         $html .= '<input name="BACKREF" value="' . $form_params['BACKREF'] . '" type="hidden">';
-        $html .= '<input name="TIMESTAMP" value="' . $form_params['OPER_TIME'] . '" type="hidden">';
+        $html .= '<input name="TIMESTAMP" value="' . $form_params['TIMESTAMP'] . '" type="hidden">';
         $html .= '<input name="NONCE" value="' . $form_params['NONCE'] . '" type="hidden">';
         $html .= '<input name="P_SIGN" value="' . $form_params['P_SIGN'] . '" type="hidden">';
         $html .= '<button type="submit" class="' . $form_params['BUTTON_CLASS'] . '">' . $form_params['BUTTON_LABEL'] . '</button>';
@@ -182,7 +182,7 @@ class AzeriCard
 
         $form_params              = $this->config;
         $form_params['ORDER']     = str_pad($form_params['ORDER'], 6, '0', STR_PAD_LEFT);
-        $form_params['OPER_TIME'] = gmdate("YmdHis");
+        $form_params['TIMESTAMP'] = gmdate("YmdHis");
         $form_params['NONCE']     = substr(md5(rand()), 0, 16);
 
         $to_sign = strlen($form_params["ORDER"]) . $form_params["ORDER"]
@@ -205,7 +205,7 @@ class AzeriCard
         $html .= '<input name="' . $this->irKey . '" value="' . $form_params[$this->irKey] . '" type="hidden">';
         $html .= '<input name="TERMINAL" value="' . $form_params['TERMINAL'] . '" type="hidden">';
         $html .= '<input name="TRTYPE" value="' . $form_params['TRTYPE'] . '" type="hidden">';
-        $html .= '<input name="TIMESTAMP" value="' . $form_params['OPER_TIME'] . '" type="hidden">';
+        $html .= '<input name="TIMESTAMP" value="' . $form_params['TIMESTAMP'] . '" type="hidden">';
         $html .= '<input name="NONCE" value="' . $form_params['NONCE'] . '" type="hidden">';
         $html .= '<input name="P_SIGN" value="' . $form_params['P_SIGN'] . '" type="hidden">';
         $html .= '<button type="submit" class="' . $form_params['BUTTON_CLASS'] . '">' . $form_params['BUTTON_LABEL'] . '</button>';
