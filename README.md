@@ -1,5 +1,6 @@
 # AzeriCard Payment Package
 
+[![Build Status](https://scrutinizer-ci.com/g/elnurxf/tap-az-parser/badges/build.png?b=master)](https://scrutinizer-ci.com/g/elnurxf/tap-az-parser/build-status/master)
 [![StyleCI](https://github.styleci.io/repos/161631520/shield?branch=master)](https://github.styleci.io/repos/161631520)
 ![](https://poser.pugx.org/elnurxf/azericard/downloads.svg)
 ![](https://img.shields.io/github/issues/elnurxf/azericard.svg)
