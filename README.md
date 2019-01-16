@@ -1,5 +1,6 @@
 # AzeriCard Payment Package
 
+[![StyleCI](https://github.styleci.io/repos/161631520/shield?branch=master)](https://github.styleci.io/repos/161631520)
 ![](https://poser.pugx.org/elnurxf/azericard/downloads.svg)
 ![](https://img.shields.io/github/issues/elnurxf/azericard.svg)
 ![](https://img.shields.io/github/forks/elnurxf/azericard.svg)
