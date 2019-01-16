@@ -93,7 +93,7 @@ class FailedTransactionException extends \Exception
         if (array_key_exists($code, self::$description)) {
             $message = self::$description[$code];
         } else {
-            $message = 'Unknown RC code: ' . $code;
+            $message = 'Unknown RC code: '.$code;
         }
 
         parent::__construct($message);
