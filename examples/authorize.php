@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/../vendor/autoload.php";
-require_once __DIR__ . "/azericard-config.php";
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/azericard-config.php';
 
 use elnurxf\AzeriCard\AzeriCard;
 use elnurxf\AzeriCard\Exceptions\EmptyRequiredParametersException;
@@ -21,23 +21,15 @@ $order = [
 $config = array_merge($config, $order);
 
 try {
-
     $azericard = new AzeriCard($config, $testMode = true);
 
     try {
-
         $htmlForm = $azericard->paymentForm();
-
     } catch (EmptyRequiredParametersException $e) {
-
-        die('Error: Parameter not set: ' . $e->getMessage());
-
+        die('Error: Parameter not set: '.$e->getMessage());
     }
-
 } catch (NoConfigException $e) {
-
     die('Error: Config are not set');
-
 }
 ?>
 <!doctype html>
